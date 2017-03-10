@@ -1,0 +1,135 @@
+<html>
+  <head>
+    <style>
+      .box {
+        padding: 20;
+        width: 20;
+        height: 20;
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      #boxOne {
+        background: teal;
+        top: 0;
+        left: 0;
+      }
+
+      #boxTwo {
+        background: orange;
+        top: 400px;
+        left: 800px;
+      }
+
+      #container {
+        background: #222;
+        width: 1000;
+        height: 500;
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div class="box" id="boxOne"></div>
+      <div class="box" id="boxTwo"></div>
+    </div>
+    <script>
+      var boxElemOne = document.getElementById('boxOne');
+      var boxElemTwo = document.getElementById('boxTwo');
+
+
+      var XdirectionOne = true; // true means positive, false = negative`
+      var YdirectionOne = true;
+
+      var XdirectionTwo = true; // true means positive, false = negative`
+      var YdirectionTwo = true;
+
+      boxElemOne.style.left = 0;
+      boxElemOne.style.top = 0;
+
+      setInterval(() => {
+          var stringifiedBoxLeft = String(boxElemOne.style.left).substr(0, boxElemOne.style.left.length - 2);
+          var stringifiedBoxTop = String(boxElemOne.style.top).substr(0, boxElemOne.style.top.length - 2);
+
+          boxElemOne.style.left = XdirectionOne ? (Number(stringifiedBoxLeft) + 2) + 'px' : (Number(stringifiedBoxLeft) - 2) + 'px';
+          boxElemOne.style.top = YdirectionOne ? (Number(stringifiedBoxTop) + 2) + 'px' : (Number(stringifiedBoxTop) - 2) + 'px';
+
+          stringifiedBoxLeft = String(boxElemOne.style.left).substr(0, boxElemOne.style.left.length - 2);
+          stringifiedBoxTop = String(boxElemOne.style.top).substr(0, boxElemOne.style.top.length - 2);
+
+          var numberifiedBoxLeft = XdirectionOne ? Number(stringifiedBoxLeft) + 2 : Number(stringifiedBoxLeft) - 2
+          var numberifiedBoxTop = YdirectionOne ? Number(stringifiedBoxTop) + 2 : Number(stringifiedBoxTop) - 2
+
+          if(XdirectionOne && numberifiedBoxLeft >= (1000 - 50)) {
+            XdirectionOne = false
+          }
+          if(!XdirectionOne && numberifiedBoxLeft <= 0) {
+            XdirectionOne = true
+          }
+
+          if(YdirectionOne && numberifiedBoxTop >= (500 - 50)) {
+            YdirectionOne = false
+          }
+          if(!YdirectionOne && numberifiedBoxTop <= 0) {
+            YdirectionOne = true
+          }
+
+      }, 5)
+
+      boxElemTwo.style.left = 800;
+      boxElemTwo.style.top = 400;
+
+      setInterval(() => {
+          console.log(boxElemTwo.style.left);
+          var stringifiedBox2Left = String(boxElemTwo.style.left).substr(0, boxElemTwo.style.left.length - 2);
+          var stringifiedBox2Top = String(boxElemTwo.style.top).substr(0, boxElemTwo.style.top.length - 2);
+
+          boxElemTwo.style.left = XdirectionTwo ? (Number(stringifiedBox2Left) + 2) + 'px' : (Number(stringifiedBox2Left) - 2) + 'px';
+          boxElemTwo.style.top = YdirectionTwo ? (Number(stringifiedBox2Top) + 2) + 'px' : (Number(stringifiedBox2Top) - 2) + 'px';
+
+          stringifiedBox2Left = String(boxElemTwo.style.left).substr(0, boxElemTwo.style.left.length - 2);
+          stringifiedBox2Top = String(boxElemTwo.style.top).substr(0, boxElemTwo.style.top.length - 2);
+
+          var numberifiedBox2Left = XdirectionTwo ? Number(stringifiedBox2Left) + 2 : Number(stringifiedBox2Left) - 2
+          var numberifiedBox2Top = YdirectionTwo ? Number(stringifiedBox2Top) + 2 : Number(stringifiedBox2Top) - 2
+
+          if(XdirectionTwo && numberifiedBox2Left >= (1000 - 50)) {
+            XdirectionTwo = false
+          }
+          if(!XdirectionTwo && numberifiedBox2Left <= 0) {
+            XdirectionTwo = true
+          }
+
+          if(YdirectionTwo && numberifiedBox2Top >= (500 - 50)) {
+            YdirectionTwo = false
+          }
+          if(!YdirectionTwo && numberifiedBox2Top <= 0) {
+            YdirectionTwo = true
+          }
+
+          if(Math.abs(numberifiedBoxTop - numberifiedBox2Top) < 200) {
+            console.log('BOOOM');
+            YdirectionTwo = false;
+          }
+      }, 5)
+      // var start = null;
+      // function step(timestamp) {
+      //   if (!start) start = timestamp;
+      //   console.log('current timestamp: ' + timestamp);
+      //   var progress = timestamp - start;
+      //   console.log('current progress: ' + progress);
+      //   console.log(boxElemOne.style.left);
+      //   console.log('=================');
+      //   // element.style.left = Math.min(progress / 10, 200) + 'px';
+      //   stringifiedBoxLeft = String(boxElemOne.style.left).substr(0, 3);
+      //   boxElemOne.style.left = (Number(stringifiedBoxLeft) + 50) + 'px';
+      //   if (progress < 10000) {
+      //     window.requestAnimationFrame(step);
+      //   }
+      // }
+      //
+      // window.requestAnimationFrame(step);
+    </script>
+  </body>
+</html>
